@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explore - Blogsphere</title>
+  <style>
+    :root {
+      --primary: #4361ee;
+      --secondary: #3f37c9;
+      --accent: #4895ef;
+      --light: #f8f9fa;
+      --dark: #212529;
+      --success: #4cc9f0;
+      --warning: #f72585;
+      --gradient: linear-gradient(135deg, #4361ee 0%, #3f37c9 50%, #4895ef 100%);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f0f4f8;
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    header {
+      background: var(--gradient);
+      color: white;
+      padding: 2rem 0;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+
+    nav {
+      background: var(--secondary);
+      padding: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    nav ul li {
+      margin: 0;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    nav a:hover {
+      background: rgba(255,255,255,0.2);
+      transform: translateY(-2px);
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+
+    .explore-header {
+      text-align: center;
+      margin-bottom: 3rem;
+      animation: fadeIn 0.6s ease forwards;
+    }
+
+    .explore-header h2 {
+      font-size: 2.2rem;
+      color: var(--secondary);
+      margin-bottom: 1rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .explore-header h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--warning);
+      border-radius: 2px;
+    }
+
+    .search-container {
+      max-width: 800px;
+      margin: 0 auto 3rem;
+      position: relative;
+      animation: fadeIn 0.6s ease 0.2s forwards;
+      opacity: 0;
+    }
+
+    .search-bar {
+      width: 100%;
+      padding: 1.2rem 1.5rem 1.2rem 3.5rem;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+
+    .search-bar:focus {
+      outline: none;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 1.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #7f8c8d;
+    }
+
+    .categories {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 3rem;
+      animation: fadeIn 0.6s ease 0.3s forwards;
+      opacity: 0;
+    }
+
+    .category {
+      padding: 0.8rem 1.5rem;
+      background: white;
+      border-radius: 50px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+
+    .category:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    }
+
+    .category.active {
+      background: var(--gradient);
+      color: white;
+      box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+    }
+
+    .trending-section {
+      margin-bottom: 4rem;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      color: var(--secondary);
+      margin-bottom: 2rem;
+      position: relative;
+      padding-bottom: 0.5rem;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 3px;
+    }
+
+    .posts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 2rem;
+    }
+
+    .post-card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      animation: fadeIn 0.6s ease forwards;
+      opacity: 0;
+    }
+
+    .post-card:nth-child(1) { animation-delay: 0.4s; }
+    .post-card:nth-child(2) { animation-delay: 0.5s; }
+    .post-card:nth-child(3) { animation-delay: 0.6s; }
+    .post-card:nth-child(4) { animation-delay: 0.7s; }
+    .post-card:nth-child(5) { animation-delay: 0.8s; }
+    .post-card:nth-child(6) { animation-delay: 0.9s; }
+
+    .post-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    }
+
+    .card-header {
+      height: 200px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    .card-header::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.7));
+    }
+
+    .card-category {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: var(--warning);
+      color: white;
+      padding: 0.3rem 1rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      z-index: 1;
+    }
+
+    .card-body {
+      padding: 1.5rem;
+    }
+
+    .card-body h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.8rem;
+      color: var(--secondary);
+    }
+
+    .card-body p {
+      color: #666;
+      margin-bottom: 1.2rem;
+      font-size: 0.95rem;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 1.5rem 1.5rem;
+    }
+
+    .author {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .author-img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--light);
+    }
+
+    .author-name {
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+
+    .date {
+      font-size: 0.85rem;
+      color: #888;
+    }
+
+    .read-time {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.85rem;
+      color: #888;
+    }
+
+    .featured-section {
+      margin-bottom: 4rem;
+    }
+
+    .featured-post {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      margin-bottom: 3rem;
+      animation: fadeIn 0.6s ease forwards;
+      opacity: 0;
+    }
+
+    .featured-post:nth-child(1) { animation-delay: 0.3s; }
+    .featured-post:nth-child(2) { animation-delay: 0.4s; }
+
+    .featured-image {
+      height: 100%;
+      min-height: 300px;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .featured-content {
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .featured-badge {
+      background: var(--warning);
+      color: white;
+      padding: 0.3rem 1rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+
+    .featured-content h3 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: var(--secondary);
+    }
+
+    .featured-content p {
+      color: #666;
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+    }
+
+    .featured-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .load-more {
+      text-align: center;
+      margin: 3rem 0;
+    }
+
+    .load-more-btn {
+      padding: 1rem 2.5rem;
+      background: var(--gradient);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+    }
+
+    .load-more-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(67, 97, 238, 0.4);
+      animation: pulse 1.5s infinite;
+    }
+
+    footer {
+      background: var(--dark);
+      color: white;
+      text-align: center;
+      padding: 3rem 0;
+      margin-top: 3rem;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-links a {
+      color: white;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+
+    .footer-social {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .footer-social a {
+      color: white;
+      font-size: 1.5rem;
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .footer-social a:hover {
+      color: var(--accent);
+      transform: translateY(-5px);
+    }
+
+    .copyright {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.7);
+    }
+
+    @media (max-width: 992px) {
+      .featured-post {
+        grid-template-columns: 1fr;
+      }
+      
+      .featured-image {
+        min-height: 250px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav ul {
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      
+      .posts-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <header>
+    <h1>Explore Blogsphere</h1>
+    <p>Discover amazing stories from our community</p>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+      <li><a href="explore.html"><i class="fas fa-compass"></i> Explore</a></li>
+      <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+      <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+      <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <section class="explore-header">
+      <h2>Discover Content</h2>
+      <p>Find stories that inspire, educate, and entertain</p>
+    </section>
+
+    <div class="search-container">
+      <i class="fas fa-search search-icon"></i>
+      <input type="text" class="search-bar" placeholder="Search for blogs, topics, or authors...">
+    </div>
+
+    <div class="categories">
+      <div class="category active">All</div>
+      <div class="category">Technology</div>
+      <div class="category">Travel</div>
+      <div class="category">Food</div>
+      <div class="category">Lifestyle</div>
+      <div class="category">Health</div>
+      <div class="category">Business</div>
+      <div class="category">Art</div>
+      <div class="category">Science</div>
+      <div class="category">Finance</div>
+    </div>
+
+    <section class="featured-section">
+      <h2 class="section-title">Featured Stories</h2>
+      
+      <div class="featured-post">
+        <div class="featured-image" style="background-image: url('https://source.unsplash.com/random/800x600/?tech')"></div>
+        <div class="featured-content">
+          <span class="featured-badge">Editor's Pick</span>
+          <h3>The Future of Artificial Intelligence in Everyday Life</h3>
+          <p>How AI is transforming our daily routines and what to expect in the coming years as this technology becomes more integrated into our lives.</p>
+          <div class="featured-meta">
+            <div class="author">
+              <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Author" class="author-img">
+              <span class="author-name">Sarah Johnson</span>
+            </div>
+            <div class="date">May 20, 2023</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="featured-post">
+        <div class="featured-image" style="background-image: url('https://source.unsplash.com/random/800x600/?travel')"></div>
+        <div class="featured-content">
+          <span class="featured-badge">Community Favorite</span>
+          <h3>Sustainable Travel: How to Explore the World Responsibly</h3>
+          <p>Practical tips and insights for reducing your environmental impact while satisfying your wanderlust and experiencing new cultures.</p>
+          <div class="featured-meta">
+            <div class="author">
+              <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Author" class="author-img">
+              <span class="author-name">Michael Chen</span>
+            </div>
+            <div class="date">May 15, 2023</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="trending-section">
+      <h2 class="section-title">Trending Now</h2>
+      <div class="posts-grid">
+        <div class="post-card">
+          <div class="card-header" style="background-image: url('https://source.unsplash.com/random/600x400/?webdev')">
+            <span class="card-category">Technology</span>
+          </div>
+          <div class="card-body">
+            <h3>The Complete Guide to Modern Web Development</h3>
+            <p>Everything you need to know about the current state of web development, from frameworks to best practices.</p>
+          </div>
+          <div class="card-footer">
+            <div class="author">
+              <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Author" class="author-img">
+              <span class="author-name">David Wilson</span>
+            </div>
+            <div class="read-time">
+              <i class="far fa-clock"></i> 8 min
+            </div>
+          </div>
+        </div>
+
+        <div class="post-card">
+          <div class="card-header" style="background-image: url('https://source.unsplash.com/random/600x400/?vegan')">
+            <span class="card-category">Food</span>
+          </div>
+          <div class="card-body">
+            <h3>10 Easy Vegan Recipes That Even Meat-Lovers Will Enjoy</h3>
+            <p>Delicious plant-based meals that are simple to make and packed with flavor to satisfy any palate.</p>
+          </div>
+          <div class="card-footer">
+            <div class="author">
+              <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Author" class="author-img">
+              <span class="author-name">Emily Rodriguez</span>
+            </div>
+            <div class="read-time">
+              <i class="far fa-clock"></i> 6 min
+            </div>
+          </div>
+        </div>
+
+        <div class="post-card">
+          <div class="card-header" style="background-image: url('https://source.unsplash.com/random/600x400/?finance')">
+            <span class="card-category">Finance</span>
+          </div>
+          <div class="card-body">
+            <h3>Personal Finance Strategies for the Digital Age</h3>
+            <p>How to manage your money effectively in an era of digital banking, cryptocurrency, and changing economic landscapes.</p>
+          </div>
+          <div class="card-footer">
+            <div class="author">
+              <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Author" class="author-img">
+              <span class="author-name">Robert Kim</span>
+            </div>
+            <div class="read-time">
+              <i class="far fa-clock"></i> 10 min
+            </div>
+          </div>
+        </div>
+
+        <div class="post-card">
+          <div class="card-header" style="background-image: url('https://source.unsplash.com/random/600x400/?fitness')">
+            <span class="card-category">Health</span>
+          </div>
+          <div class="card-body">
+            <h3>The Science of Building Healthy Habits That Last</h3>
+            <p>Evidence-based methods for creating sustainable lifestyle changes that improve your health and wellbeing.</p>
+          </div>
+          <div class="card-footer">
+            <div class="author">
+              <img src="https://randomuser.me/api/portraits/women/54.jpg" alt="Author" class="author-img">
+              <span class="author-name">Jessica Lee</span>
+            </div>
+            <div class="read-time">
+              <i class="far fa-clock"></i> 7 min
+            </div>
+          </div>
+        </div>
+
+        <div class="post-card">
+          <div class="card-header" style="background-image: url('https://source.unsplash.com/random/600x400/?art')">
+            <span class="card-category">Art</span>
+          </div>
+          <div class="card-body">
+            <h3>Digital Art Revolution: Tools and Techniques for Beginners</h3>
+            <p>An introduction to the world of digital art creation, covering essential tools and fundamental techniques.</p>
+          </div>
+          <div class="card-footer">
+            <div class="author">
+              <img src="https://randomuser.me/api/portraits/women/33.jpg" alt="Author" class="author-img">
+              <span class="author-name">Anna Park</span>
+            </div>
+            <div class="read-time">
+              <i class="far fa-clock"></i> 9 min
+            </div>
+          </div>
+        </div>
+
+        <div class="post-card">
+          <div class="card-header" style="background-image: url('https://source.unsplash.com/random/600x400/?business')">
+            <span class="card-category">Business</span>
+          </div>
+          <div class="card-body">
+            <h3>Remote Work Culture: Building Strong Teams Across Distances</h3>
+            <p>Strategies for maintaining company culture and team cohesion in an increasingly remote work environment.</p>
+          </div>
+          <div class="card-footer">
+            <div class="author">
+              <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Author" class="author-img">
+              <span class="author-name">James Wilson</span>
+            </div>
+            <div class="read-time">
+              <i class="far fa-clock"></i> 8 min
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="load-more">
+      <button class="load-more-btn">Load More Stories</button>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+      </div>
+      <div class="footer-social">
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+      </div>
+      <div class="copyright">
+        &copy; 2023 Blogsphere. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Add active class to clicked category
+    const categories = document.querySelectorAll('.category');
+    categories.forEach(category => {
+      category.addEventListener('click', () => {
+        categories.forEach(c => c.classList.remove('active'));
+        category.classList.add('active');
+      });
+    });
+
+    // Simulate loading more content
+    document.querySelector('.load-more-btn').addEventListener('click', function() {
+      this.textContent = 'Loading...';
+      setTimeout(() => {
+        this.textContent = 'No More Stories';
+        this.style.backgroundColor = '#ccc';
+        this.style.cursor = 'not-allowed';
+      }, 1500);
+    });
+  </script>
+</body>
+</html>

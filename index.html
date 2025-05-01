@@ -1,39 +1,450 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>My Blog</title>
-  <link rel="stylesheet" href="style.css"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blogsphere - Home</title>
+  <style>
+    :root {
+      --primary: #4361ee;
+      --secondary: #3f37c9;
+      --accent: #4895ef;
+      --light: #f8f9fa;
+      --dark: #212529;
+      --success: #4cc9f0;
+      --warning: #f72585;
+      --gradient: linear-gradient(135deg, #4361ee 0%, #3f37c9 50%, #4895ef 100%);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f0f4f8;
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    header {
+      background: var(--gradient);
+      color: white;
+      padding: 2rem 0;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+
+    nav {
+      background: var(--secondary);
+      padding: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover {
+      background: rgba(255,255,255,0.2);
+      transform: translateY(-2px);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .blog-card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      animation: fadeIn 0.6s ease forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .blog-card:nth-child(1) { animation-delay: 0.1s; }
+    .blog-card:nth-child(2) { animation-delay: 0.2s; }
+    .blog-card:nth-child(3) { animation-delay: 0.3s; }
+    .blog-card:nth-child(4) { animation-delay: 0.4s; }
+
+    .blog-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    }
+
+    .card-header {
+      height: 180px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    .card-header::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.7));
+    }
+
+    .card-category {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: var(--warning);
+      color: white;
+      padding: 0.3rem 0.8rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      z-index: 1;
+    }
+
+    .card-body {
+      padding: 1.5rem;
+    }
+
+    .card-body h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      color: var(--secondary);
+    }
+
+    .card-body p {
+      color: #666;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 1.5rem 1.5rem;
+    }
+
+    .author {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .author-img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--accent);
+    }
+
+    .author-name {
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+
+    .date {
+      font-size: 0.8rem;
+      color: #888;
+    }
+
+    .add-blog {
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      margin-top: 3rem;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      animation: fadeIn 0.6s ease 0.5s forwards;
+      opacity: 0;
+    }
+
+    .add-blog h2 {
+      color: var(--secondary);
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    #blog-form input,
+    #blog-form textarea {
+      width: 100%;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border: 2px solid #eee;
+      border-radius: 10px;
+      font-family: 'Poppins', sans-serif;
+      transition: all 0.3s ease;
+    }
+
+    #blog-form input:focus,
+    #blog-form textarea:focus {
+      border-color: var(--accent);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(72, 149, 239, 0.2);
+    }
+
+    #blog-form textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    #blog-form button {
+      width: 100%;
+      padding: 1rem;
+      background: var(--gradient);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    #blog-form button:hover {
+      background: var(--secondary);
+      animation: pulse 1s infinite;
+    }
+
+    footer {
+      background: var(--dark);
+      color: white;
+      text-align: center;
+      padding: 2rem 0;
+      margin-top: 3rem;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin: 1rem 0;
+    }
+
+    .social-links a {
+      color: white;
+      font-size: 1.5rem;
+      transition: transform 0.3s ease;
+    }
+
+    .social-links a:hover {
+      transform: translateY(-5px) scale(1.1);
+      color: var(--accent);
+    }
+
+    @media (max-width: 768px) {
+      nav ul {
+        gap: 1rem;
+      }
+      
+      .blog-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
   <header>
-    <h1>Blogsphere website</h1>
+    <h1>Blogsphere</h1>
+    <p>Share your stories with the world</p>
   </header>
 
-  <main>
-    <section id="blog-list">
-      <h2>Stories</h2>
-      <div class="post">
-        <h3>Welcome to My Blog</h3>
-        <p>This is a sample blog post to get things started!</p>
-      </div>
-      <div class="post">
-        <h3>Another Day, Another Story</h3>
-        <p>Sharing thoughts and ideas every day.</p>
-      </div>
-    </section>
+  <nav>
+    <ul>
+      <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+      <li><a href="explore.html"><i class="fas fa-compass"></i> Explore</a></li>
+      <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+      <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+      <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+    </ul>
+  </nav>
 
-    <section id="add-blog">
-      <h2>Add Your Story</h2>
+  <div class="container">
+    <div class="blog-grid">
+      <div class="blog-card">
+        <div class="card-header" style="background-image: url('https://source.unsplash.com/random/600x400/?tech')">
+          <span class="card-category">Technology</span>
+        </div>
+        <div class="card-body">
+          <h3>The Future of Web Development</h3>
+          <p>Exploring the latest trends and technologies that are shaping the future of web development in 2023 and beyond.</p>
+        </div>
+        <div class="card-footer">
+          <div class="author">
+            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Author" class="author-img">
+            <span class="author-name">Sarah Johnson</span>
+          </div>
+          <span class="date">May 15, 2023</span>
+        </div>
+      </div>
+
+      <div class="blog-card">
+        <div class="card-header" style="background-image: url('https://source.unsplash.com/random/600x400/?travel')">
+          <span class="card-category">Travel</span>
+        </div>
+        <div class="card-body">
+          <h3>Hidden Gems in Southeast Asia</h3>
+          <p>Discover these breathtaking but less-known destinations in Southeast Asia that will make your trip unforgettable.</p>
+        </div>
+        <div class="card-footer">
+          <div class="author">
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Author" class="author-img">
+            <span class="author-name">Michael Chen</span>
+          </div>
+          <span class="date">May 10, 2023</span>
+        </div>
+      </div>
+
+      <div class="blog-card">
+        <div class="card-header" style="background-image: url('https://source.unsplash.com/random/600x400/?food')">
+          <span class="card-category">Food</span>
+        </div>
+        <div class="card-body">
+          <h3>Vegan Recipes for Beginners</h3>
+          <p>Simple yet delicious vegan recipes that anyone can prepare at home, even if you're new to plant-based cooking.</p>
+        </div>
+        <div class="card-footer">
+          <div class="author">
+            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Author" class="author-img">
+            <span class="author-name">Emily Rodriguez</span>
+          </div>
+          <span class="date">May 5, 2023</span>
+        </div>
+      </div>
+
+      <div class="blog-card">
+        <div class="card-header" style="background-image: url('https://source.unsplash.com/random/600x400/?fitness')">
+          <span class="card-category">Health</span>
+        </div>
+        <div class="card-body">
+          <h3>30-Minute Home Workout</h3>
+          <p>This effective full-body workout requires no equipment and can be done in just 30 minutes at home.</p>
+        </div>
+        <div class="card-footer">
+          <div class="author">
+            <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Author" class="author-img">
+            <span class="author-name">David Wilson</span>
+          </div>
+          <span class="date">April 28, 2023</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="add-blog">
+      <h2>Share Your Story</h2>
       <form id="blog-form">
-        <input type="text" id="title" placeholder="Blog Title" required />
-        <textarea id="content" placeholder="Your story..." required></textarea>
-        <button type="submit">Post Blog</button>
+        <input type="text" id="title" placeholder="Your blog title" required>
+        <textarea id="content" placeholder="Tell your story..." required></textarea>
+        <button type="submit">Publish Post <i class="fas fa-paper-plane"></i></button>
       </form>
-    </section>
-  </main>
+    </div>
+  </div>
 
-  <script src="script.js"></script>
+  <footer>
+    <div class="social-links">
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-facebook"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-linkedin"></i></a>
+      <a href="#"><i class="fab fa-github"></i></a>
+    </div>
+    <p>&copy; 2023 Blogsphere. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.getElementById("blog-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+    
+      const title = document.getElementById("title").value.trim();
+      const content = document.getElementById("content").value.trim();
+    
+      if (title && content) {
+        // Create a random category
+        const categories = ['Technology', 'Travel', 'Food', 'Health', 'Lifestyle', 'Business'];
+        const randomCategory = categories[Math.floor(Math.random() * categories.length)];
+        
+        // Create random author data
+        const gender = Math.random() > 0.5 ? 'men' : 'women';
+        const randomId = Math.floor(Math.random() * 100);
+        
+        // Create new blog card
+        const blogGrid = document.querySelector('.blog-grid');
+        const newPost = document.createElement('div');
+        newPost.className = 'blog-card';
+        newPost.style.animation = 'fadeIn 0.6s ease forwards';
+        newPost.innerHTML = `
+          <div class="card-header" style="background-image: url('https://source.unsplash.com/random/600x400/?${randomCategory.toLowerCase()}')">
+            <span class="card-category">${randomCategory}</span>
+          </div>
+          <div class="card-body">
+            <h3>${title}</h3>
+            <p>${content}</p>
+          </div>
+          <div class="card-footer">
+            <div class="author">
+              <img src="https://randomuser.me/api/portraits/${gender}/${randomId}.jpg" alt="Author" class="author-img">
+              <span class="author-name">You</span>
+            </div>
+            <span class="date">Just now</span>
+          </div>
+        `;
+        
+        // Add to the beginning of the grid
+        blogGrid.insertBefore(newPost, blogGrid.firstChild);
+        
+        // Reset form
+        document.getElementById("blog-form").reset();
+        
+        // Scroll to show the new post
+        newPost.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  </script>
 </body>
 </html>

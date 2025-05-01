@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile - Blogsphere</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f0f4f8;
+      color: #333;
+    }
+
+    header {
+      background: #2c3e50;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    nav {
+      background: #34495e;
+      padding: 10px;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    nav ul li {
+      margin: 0 15px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    nav ul li a:hover {
+      color: #3498db;
+    }
+
+    main {
+      padding: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .profile-header {
+      display: flex;
+      align-items: center;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+
+    .profile-pic {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 30px;
+      border: 5px solid #ecf0f1;
+    }
+
+    .profile-info h2 {
+      margin: 0 0 10px 0;
+      color: #2c3e50;
+    }
+
+    .profile-info p {
+      margin: 5px 0;
+      color: #7f8c8d;
+    }
+
+    .profile-stats {
+      display: flex;
+      margin-top: 15px;
+    }
+
+    .stat {
+      margin-right: 20px;
+    }
+
+    .stat span:first-child {
+      font-weight: bold;
+      color: #2c3e50;
+    }
+
+    .profile-content {
+      display: flex;
+    }
+
+    .profile-sidebar {
+      width: 250px;
+      margin-right: 30px;
+    }
+
+    .profile-menu {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+
+    .profile-menu h3 {
+      margin-top: 0;
+      border-bottom: 1px solid #ecf0f1;
+      padding-bottom: 10px;
+    }
+
+    .profile-menu ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .profile-menu li {
+      margin: 10px 0;
+    }
+
+    .profile-menu a {
+      color: #3498db;
+      text-decoration: none;
+    }
+
+    .profile-menu a:hover {
+      text-decoration: underline;
+    }
+
+    .profile-main {
+      flex: 1;
+    }
+
+    .user-posts .post {
+      background: white;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .edit-profile-btn {
+      padding: 8px 15px;
+      background: #2980b9;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .edit-profile-btn:hover {
+      background: #3498db;
+    }
+
+    footer {
+      background: #2c3e50;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Blogsphere</h1>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="login.html">Login</a></li>
+      <li><a href="register.html">Register</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="profile-header">
+      <img src="https://randomuser.me/api/portraits/men/42.jpg" alt="Profile Picture" class="profile-pic">
+      <div class="profile-info">
+        <h2>John Doe</h2>
+        <p>Member since: January 2023</p>
+        <p>Location: New York, USA</p>
+        <div class="profile-stats">
+          <div class="stat">
+            <span>24</span> <span>Posts</span>
+          </div>
+          <div class="stat">
+            <span>156</span> <span>Followers</span>
+          </div>
+          <div class="stat">
+            <span>87</span> <span>Following</span>
+          </div>
+        </div>
+      </div>
+      <button class="edit-profile-btn">Edit Profile</button>
+    </div>
+
+    <div class="profile-content">
+      <div class="profile-sidebar">
+        <div class="profile-menu">
+          <h3>Menu</h3>
+          <ul>
+            <li><a href="#">My Posts</a></li>
+            <li><a href="#">Saved Posts</a></li>
+            <li><a href="#">Drafts</a></li>
+            <li><a href="#">Account Settings</a></li>
+            <li><a href="#">Notifications</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="profile-main">
+        <h2>Recent Posts</h2>
+        <div class="user-posts">
+          <div class="post">
+            <h3>The Journey Begins</h3>
+            <p>Starting my blogging journey with this first post. Excited to share my thoughts with the world!</p>
+            <small>Posted on: March 15, 2023</small>
+          </div>
+          <div class="post">
+            <h3>Learning Web Development</h3>
+            <p>My experiences learning HTML, CSS, and JavaScript over the past few months.</p>
+            <small>Posted on: April 2, 2023</small>
+          </div>
+          <div class="post">
+            <h3>Traveling to Japan</h3>
+            <p>An amazing trip to Tokyo and Kyoto last summer. The culture, food, and people were incredible.</p>
+            <small>Posted on: April 18, 2023</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - Blogsphere</title>
+    <style>
+      :root {
+        --primary: #4361ee;
+        --secondary: #3f37c9;
+        --accent: #4895ef;
+        --light: #f8f9fa;
+        --dark: #212529;
+        --success: #4cc9f0;
+        --warning: #f72585;
+        --gradient: linear-gradient(135deg, #4361ee 0%, #3f37c9 50%, #4895ef 100%);
+      }
+  
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+  
+      body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #f0f4f8;
+        color: var(--dark);
+        line-height: 1.6;
+      }
+  
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+  
+      @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+      }
+  
+      header {
+        background: var(--gradient);
+        color: white;
+        padding: 2rem 0;
+        text-align: center;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      }
+  
+      header h1 {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+      }
+  
+      nav {
+        background: var(--secondary);
+        padding: 1rem;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+  
+      nav ul {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+      }
+  
+      nav ul li {
+        margin: 0;
+      }
+  
+      nav a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        padding: 0.5rem 1rem;
+        border-radius: 50px;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+  
+      nav a:hover {
+        background: rgba(255,255,255,0.2);
+        transform: translateY(-2px);
+      }
+  
+      .container {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 1.5rem;
+      }
+  
+      .profile-header {
+        display: flex;
+        align-items: center;
+        background: white;
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        margin-bottom: 2rem;
+        animation: fadeIn 0.6s ease forwards;
+        position: relative;
+      }
+  
+      .profile-pic {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 2rem;
+        border: 5px solid var(--light);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+      }
+  
+      .profile-header:hover .profile-pic {
+        transform: scale(1.05);
+        border-color: var(--accent);
+      }
+  
+      .profile-info h2 {
+        margin: 0 0 0.5rem 0;
+        color: var(--secondary);
+        font-size: 1.8rem;
+      }
+  
+      .profile-info p {
+        margin: 0.3rem 0;
+        color: #666;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+  
+      .profile-info p i {
+        color: var(--accent);
+      }
+  
+      .profile-stats {
+        display: flex;
+        margin-top: 1.5rem;
+        gap: 2rem;
+      }
+  
+      .stat {
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+  
+      .stat:hover {
+        transform: translateY(-3px);
+      }
+  
+      .stat span:first-child {
+        font-weight: 700;
+        color: var(--secondary);
+        font-size: 1.3rem;
+        display: block;
+      }
+  
+      .stat span:last-child {
+        color: #666;
+        font-size: 0.9rem;
+      }
+  
+      .edit-profile-btn {
+        position: absolute;
+        right: 2rem;
+        top: 2rem;
+        padding: 0.8rem 1.5rem;
+        background: var(--gradient);
+        color: white;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        font-weight: 600;
+        box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+        transition: all 0.3s ease;
+      }
+  
+      .edit-profile-btn:hover {
+        background: var(--secondary);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(67, 97, 238, 0.4);
+      }
+  
+      .profile-content {
+        display: grid;
+        grid-template-columns: 250px 1fr;
+        gap: 2rem;
+        animation: fadeIn 0.6s ease 0.2s forwards;
+        opacity: 0;
+      }
+  
+      .profile-sidebar {
+        position: sticky;
+        top: 100px;
+        height: fit-content;
+      }
+  
+      .profile-menu {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+  
+      .profile-menu h3 {
+        margin-top: 0;
+        margin-bottom: 1rem;
+        color: var(--secondary);
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid var(--light);
+      }
+  
+      .profile-menu ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+  
+      .profile-menu li {
+        margin: 0.8rem 0;
+      }
+  
+      .profile-menu a {
+        color: #555;
+        text-decoration: none;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        padding: 0.5rem;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+      }
+  
+      .profile-menu a:hover, .profile-menu a.active {
+        color: var(--accent);
+        background: rgba(72, 149, 239, 0.1);
+        transform: translateX(5px);
+      }
+  
+      .profile-menu a i {
+        width: 20px;
+        text-align: center;
+      }
+  
+      .profile-main {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        padding: 2rem;
+      }
+  
+      .section-title {
+        font-size: 1.5rem;
+        color: var(--secondary);
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid var(--light);
+      }
+  
+      .user-posts .post {
+        background: white;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        border-radius: 10px;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        transition: all 0.3s ease;
+        border-left: 4px solid transparent;
+      }
+  
+      .user-posts .post:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        border-left: 4px solid var(--accent);
+      }
+  
+      .user-posts .post h3 {
+        margin-top: 0;
+        margin-bottom: 0.8rem;
+        color: var(--secondary);
+      }
+  
+      .user-posts .post p {
+        color: #666;
+        margin-bottom: 1rem;
+      }
+  
+      .user-posts .post small {
+        color: #888;
+        font-size: 0.85rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+  
+      .user-posts .post small i {
+        color: var(--accent);
+      }
+  
+      .badges-section {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+  
+      .badges-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+        gap: 1rem;
+      }
+  
+      .badge {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+  
+      .badge-icon {
+        width: 60px;
+        height: 60px;
+        background: var(--light);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: var(--accent);
+        margin-bottom: 0.5rem;
+        transition: all 0.3s ease;
+      }
+  
+      .badge:hover .badge-icon {
+        background: var(--gradient);
+        color: white;
+        transform: scale(1.1);
+      }
+  
+      .badge-name {
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: #555;
+      }
+  
+      footer {
+        background: var(--dark);
+        color: white;
+        text-align: center;
+        padding: 2rem 0;
+        margin-top: 3rem;
+      }
+  
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+      }
+  
+      .footer-links {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+  
+      .footer-links a {
+        color: white;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+  
+      .footer-links a:hover {
+        color: var(--accent);
+      }
+  
+      .footer-social {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        margin: 1.5rem 0;
+      }
+  
+      .footer-social a {
+        color: white;
+        font-size: 1.5rem;
+        transition: transform 0.3s ease, color 0.3s ease;
+      }
+  
+      .footer-social a:hover {
+        color: var(--accent);
+        transform: translateY(-5px);
+      }
+  
+      .copyright {
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid rgba(255,255,255,0.1);
+        font-size: 0.9rem;
+        color: rgba(255,255,255,0.7);
+      }
+  
+      @media (max-width: 992px) {
+        .profile-content {
+          grid-template-columns: 1fr;
+        }
+        
+        .profile-sidebar {
+          position: static;
+        }
+        
+        .profile-header {
+          flex-direction: column;
+          text-align: center;
+        }
+        
+        .profile-pic {
+          margin-right: 0;
+          margin-bottom: 1.5rem;
+        }
+        
+        .profile-stats {
+          justify-content: center;
+        }
+        
+        .edit-profile-btn {
+          position: static;
+          margin-top: 1.5rem;
+        }
+      }
+  
+      @media (max-width: 768px) {
+        nav ul {
+          flex-wrap: wrap;
+          gap: 1rem;
+        }
+      }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  </head>
+  <body>
+    <header>
+      <h1>Blogsphere</h1>
+      <p>Your personal blogging space</p>
+    </header>
+  
+    <nav>
+      <ul>
+        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="explore.html"><i class="fas fa-compass"></i> Explore</a></li>
+        <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+        <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+        <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
+      </ul>
+    </nav>
+  
+    <div class="container">
+      <div class="profile-header">
+        <img src="https://randomuser.me/api/portraits/men/42.jpg" alt="Profile Picture" class="profile-pic">
+        <div class="profile-info">
+          <h2>John Doe</h2>
+          <p><i class="fas fa-calendar-alt"></i> Member since: January 2023</p>
+          <p><i class="fas fa-map-marker-alt"></i> New York, USA</p>
+          <p><i class="fas fa-briefcase"></i> Web Developer & Blogger</p>
+          <div class="profile-stats">
+            <div class="stat">
+              <span>24</span>
+              <span>Posts</span>
+            </div>
+            <div class="stat">
+              <span>156</span>
+              <span>Followers</span>
+            </div>
+            <div class="stat">
+              <span>87</span>
+              <span>Following</span>
+            </div>
+          </div>
+        </div>
+        <button class="edit-profile-btn"><i class="fas fa-edit"></i> Edit Profile</button>
+      </div>
+  
+      <div class="profile-content">
+        <div class="profile-sidebar">
+          <div class="profile-menu">
+            <h3>Menu</h3>
+            <ul>
+              <li><a href="#" class="active"><i class="fas fa-newspaper"></i> My Posts</a></li>
+              <li><a href="#"><i class="fas fa-bookmark"></i> Saved Posts</a></li>
+              <li><a href="#"><i class="fas fa-file-alt"></i> Drafts</a></li>
+              <li><a href="#"><i class="fas fa-cog"></i> Account Settings</a></li>
+              <li><a href="#"><i class="fas fa-bell"></i> Notifications</a></li>
+              <li><a href="#"><i class="fas fa-chart-line"></i> Analytics</a></li>
+              <li><a href="#"><i class="fas fa-heart"></i> Likes</a></li>
+              <li><a href="#"><i class="fas fa-comments"></i> Comments</a></li>
+            </ul>
+          </div>
+  
+          <div class="badges-section">
+            <h3 class="section-title">Achievements</h3>
+            <div class="badges-grid">
+              <div class="badge">
+                <div class="badge-icon">
+                  <i class="fas fa-medal"></i>
+                </div>
+                <span class="badge-name">First Post</span>
+              </div>
+              <div class="badge">
+                <div class="badge-icon">
+                  <i class="fas fa-fire"></i>
+                </div>
+                <span class="badge-name">Trending</span>
+              </div>
+              <div class="badge">
+                <div class="badge-icon">
+                  <i class="fas fa-star"></i>
+                </div>
+                <span class="badge-name">Top Writer</span>
+              </div>
+              <div class="badge">
+                <div class="badge-icon">
+                  <i class="fas fa-users"></i>
+                </div>
+                <span class="badge-name">Community</span>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="profile-main">
+          <h2 class="section-title">Recent Posts</h2>
+          <div class="user-posts">
+            <div class="post">
+              <h3>The Journey Begins</h3>
+              <p>Starting my blogging journey with this first post. Excited to share my thoughts with the world and connect with like-minded individuals who are passionate about technology and travel.</p>
+              <small><i class="far fa-calendar-alt"></i> Posted on: March 15, 2023</small>
+            </div>
+            <div class="post">
+              <h3>Learning Web Development</h3>
+              <p>My experiences learning HTML, CSS, and JavaScript over the past few months. Sharing the resources that helped me most and the projects I've built along the way.</p>
+              <small><i class="far fa-calendar-alt"></i> Posted on: April 2, 2023</small>
+            </div>
+            <div class="post">
+              <h3>Traveling to Japan</h3>
+              <p>An amazing trip to Tokyo and Kyoto last summer. The culture, food, and people were incredible. Here are my recommendations for must-visit places and hidden gems.</p>
+              <small><i class="far fa-calendar-alt"></i> Posted on: April 18, 2023</small>
+            </div>
+            <div class="post">
+              <h3>The Future of Remote Work</h3>
+              <p>How remote work is changing the tech industry and what we can expect in the coming years based on current trends and emerging technologies.</p>
+              <small><i class="far fa-calendar-alt"></i> Posted on: May 5, 2023</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <footer>
+      <div class="footer-content">
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms of Service</a>
+        </div>
+        <div class="footer-social">
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+        <div class="copyright">
+          &copy; 2025 Blogsphere. All rights reserved.
+        </div>
+      </div>
+    </footer>
+  
+    <script>
+      // Add click handler for edit profile button
+      document.querySelector('.edit-profile-btn').addEventListener('click', function() {
+        alert('Edit profile functionality would open a modal or redirect to edit page');
+      });
+      
+      // Add hover effect to stats
+      document.querySelectorAll('.stat').forEach(stat => {
+        stat.addEventListener('mouseenter', function() {
+          this.querySelector('span:first-child').style.color = 'var(--accent)';
+        });
+        stat.addEventListener('mouseleave', function() {
+          this.querySelector('span:first-child').style.color = 'var(--secondary)';
+        });
+      });
+    </script>
+  </body>
+  </html>
+  <footer>
+    <p>&copy; 2025 Blogsphere. All rights reserved.</p>
+  </footer>
+</body>
+</html>
