@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Blog</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <header>
+    <h1>My Awesome Blog</h1>
+  </header>
+
+  <main>
+    <section id="blog-list">
+      <h2>Stories</h2>
+      <div class="post">
+        <h3>Welcome to My Blog</h3>
+        <p>This is a sample blog post to get things started!</p>
+      </div>
+      <div class="post">
+        <h3>Another Day, Another Story</h3>
+        <p>Sharing thoughts and ideas every day.</p>
+      </div>
+    </section>
+
+    <section id="add-blog">
+      <h2>Add Your Story</h2>
+      <form id="blog-form">
+        <input type="text" id="title" placeholder="Blog Title" required />
+        <textarea id="content" placeholder="Your story..." required></textarea>
+        <button type="submit">Post Blog</button>
+      </form>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
