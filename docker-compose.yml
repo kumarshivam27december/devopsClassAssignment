@@ -6,3 +6,9 @@ services:
     ports:
       - "8081:80"
     container_name: blog_website
+
+    # This service represents the blog website.
+    # It builds the Docker image from the current directory (where the Dockerfile is located).
+    # The container will map port 80 inside the container to port 8081 on the host machine.
+    # The container is named "blog_website" for easier identification.
+    

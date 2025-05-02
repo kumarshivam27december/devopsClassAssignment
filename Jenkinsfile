@@ -1,10 +1,8 @@
 pipeline {
     agent any
-
     environment {
         COMPOSE_PROJECT_NAME = "blog_website_project"
     }
-
     stages {
         stage('Checkout Code') {
             steps {
@@ -25,13 +23,12 @@ pipeline {
             }
         }
     }
-
     post {
         success {
-            echo '✅ Blog website deployed successfully on port 8081!'
+            echo 'Blog website deployed successfully on port 8081!'
         }
         failure {
-            echo '❌ Deployment failed.'
+            echo ' Deployment failed.'
         }
     }
 }
